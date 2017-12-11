@@ -1,0 +1,435 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a sample Training server.\n"
+  version: "1.0.0"
+  title: "Training Project"
+  contact:
+    email: "sergei_kolevatov@epam.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/kilo/node-ex/1.0.0"
+tags:
+- name: "products"
+  description: "Everything about products"
+- name: "cities"
+  description: "All you need to know about cities"
+- name: "users"
+  description: "Operations about user"
+schemes:
+- "https"
+- "http"
+paths:
+  /api/products:
+    get:
+      tags:
+      - "products"
+      summary: "Finds all Products"
+      operationId: "findAllProducts"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+      x-swagger-router-controller: "Products"
+    post:
+      tags:
+      - "products"
+      summary: "Add a new product to the store"
+      operationId: "addProduct"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Product object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+        500:
+          description: "Internal Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Products"
+  /api/products/{productId}/reviews:
+    get:
+      tags:
+      - "products"
+      summary: "Finds reviews on Product by id"
+      operationId: "findProductReviewById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "productId"
+        in: "path"
+        description: "Id to filter by"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        404:
+          description: "Product not found"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Products"
+  /api/products/{productId}:
+    get:
+      tags:
+      - "products"
+      summary: "Finds Product by id"
+      operationId: "findProductById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "productId"
+        in: "path"
+        description: "Id to filter by"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Product"
+        404:
+          description: "Product not found"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Products"
+    delete:
+      tags:
+      - "products"
+      summary: "Deletes a product"
+      operationId: "deleteProduct"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "productId"
+        in: "path"
+        description: "Id to filter by"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Product"
+        404:
+          description: "Product not found"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Products"
+  /api/cities:
+    get:
+      tags:
+      - "cities"
+      summary: "Finds all Cities"
+      operationId: "findAllCities"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/City"
+      x-swagger-router-controller: "Cities"
+    post:
+      tags:
+      - "cities"
+      summary: "Add a new city to the store"
+      operationId: "addCity"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "City object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/City"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/City"
+        500:
+          description: "Internal Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Cities"
+    put:
+      tags:
+      - "cities"
+      summary: "Add a new city or modify existing one"
+      operationId: "putCity"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "City object that needs to be added or modified in the store"
+        required: true
+        schema:
+          $ref: "#/definitions/City"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/City"
+        500:
+          description: "Internal Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Cities"
+  /api/cities/{cityId}:
+    get:
+      tags:
+      - "cities"
+      summary: "Finds City by id"
+      operationId: "findCityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "cityId"
+        in: "path"
+        description: "Id to filter by"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/City"
+        404:
+          description: "City not found"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Cities"
+    delete:
+      tags:
+      - "cities"
+      summary: "Deletes a city"
+      operationId: "deleteCity"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "cityId"
+        in: "path"
+        description: "Id to be deleted"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/City"
+        404:
+          description: "City not found"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Cities"
+  /api/users:
+    get:
+      tags:
+      - "users"
+      summary: "Finds all users"
+      operationId: "findAllUsers"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+      x-swagger-router-controller: "Users"
+    post:
+      tags:
+      - "users"
+      summary: "Add a new user to the store"
+      operationId: "addUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        500:
+          description: "Internal Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Users"
+  /api/users/{userId}:
+    get:
+      tags:
+      - "users"
+      summary: "Finds User by id"
+      operationId: "findUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "path"
+        description: "Id to be found by"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        404:
+          description: "User not found"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Users"
+    delete:
+      tags:
+      - "users"
+      summary: "Deletes a user"
+      operationId: "deleteUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "path"
+        description: "Id to be deleted"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        404:
+          description: "City not found"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Users"
+definitions:
+  Error:
+    type: "object"
+    properties:
+      error:
+        type: "string"
+        example: "Not Found"
+  Product:
+    type: "object"
+    required:
+    - "id"
+    - "product_name"
+    properties:
+      id:
+        type: "string"
+      product_name:
+        type: "string"
+      reviews:
+        type: "array"
+        items:
+          type: "string"
+      price:
+        type: "string"
+    example:
+      reviews:
+      - "reviews"
+      - "reviews"
+      price: "price"
+      id: "id"
+      product_name: "product_name"
+  City:
+    type: "object"
+    required:
+    - "capital"
+    - "id"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      country:
+        type: "string"
+      capital:
+        type: "boolean"
+      location:
+        $ref: "#/definitions/City_location"
+    example:
+      country: "country"
+      capital: true
+      name: "name"
+      location:
+        lat: 0.80082819046101150206595775671303272247314453125
+        long: 6.02745618307040320615897144307382404804229736328125
+      id: "id"
+  User:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      surname:
+        type: "string"
+    example:
+      surname: "surname"
+      name: "name"
+      id: "id"
+  City_location:
+    properties:
+      lat:
+        type: "number"
+      long:
+        type: "number"
+    example:
+      lat: 0.80082819046101150206595775671303272247314453125
+      long: 6.02745618307040320615897144307382404804229736328125
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
